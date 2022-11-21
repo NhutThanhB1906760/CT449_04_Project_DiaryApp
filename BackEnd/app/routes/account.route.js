@@ -1,0 +1,11 @@
+const express = require('express');
+const account = require('../controllers/account.controller');
+
+const router = express.Router();
+//Account
+router.route('/Register').post(account.create);
+router.route('/Login').post(account.checkLogin);
+router.route('/:id').put(account.update)
+// router.route('/:id').get(account.findOne).put(account.update).delete(account.delete);
+
+module.exports=router;
