@@ -45,6 +45,11 @@ const routes = [
         name: "changePass",
         component: () => import("@/views/UserPassword.vue"),
     },
+    {
+        path: "/deleteAccount",
+        name: "deleteAcc",
+        component: () => import("@/views/DeleteAccount.vue"),
+    },
 ];
 
 
@@ -54,7 +59,7 @@ const router = createRouter({
 });
 router.beforeEach((to, from) => {
     const authenticated=store.state.isAuthenticated
-    if ((to.name === 'Home' )&& authenticated===false) {
+    if ((to.name === 'Home' || to.name === 'diary.edit' || to.name === 'diary.create' || to.name === 'changeName' || to.name === 'changePass' || to.name === 'deleteAcc' )&& authenticated===false) {
         router.push('/Diary/Login')
     }
 })

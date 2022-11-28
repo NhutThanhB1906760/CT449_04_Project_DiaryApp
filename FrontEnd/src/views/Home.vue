@@ -9,30 +9,20 @@
                     Nhật Ký
                     <i class="fas fa-solid fa-book-journal-whills"></i>
                 </h4>
-                <button class="btn btn-sm btn-danger" style="margin-bottom: 10px;" @click="removeAllContacts">
+                <button class="btn btn-sm btn-outline-primary" style="margin-bottom: 10px; margin-right: 10px;" @click="createDiary">
+                    Thêm nhật ký <i class="fas fa-plus"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" style="margin-bottom: 10px;" @click="removeAllContacts">
                     <i class="fas fa-trash"></i> Xóa tất cả
                 </button>
+                
                 <ContactList v-if="filteredContactsCount > 0" :contacts="filteredContacts"
                     v-model:activeIndex="activeIndex" />
                 <p v-else>Không có nhật ký nào.</p>
-                <!-- <div class=" justify-content-around align-items-center">
-                <button class="btn btn-sm btn-primary" @click="refreshList()">
-                    <i class="fas fa-redo"></i> Làm mới
-                </button>
-
-                <button class="btn btn-sm btn-success" @click="goToAddContact">
-                    <i class="fas fa-plus"></i> Thêm mới
-                </button>
-
-
-                <button class="btn btn-sm btn-danger" @click="removeAllContacts">
-                    <i class="fas fa-trash"></i> Xóa tất cả
-                </button>
-            </div> -->
 
             </div>
             <div class="col">
-                <div class="p-3 border bg-light top" v-if="activeContact">
+                <div class="p-3 border  border-success top shadow p-3 mb-5 bg-body rounded" v-if="activeContact">
                     <h4>
                         Chi tiết Nhật ký
                         <!-- <i class="fas fa-address-card"></i> -->
@@ -45,6 +35,9 @@
                         <span class="mt-2 badge badge-warning">
                             <i class="fas fa-edit"></i> Hiệu chỉnh</span>
                     </router-link>
+                    <button class="mt-2 badge badge-danger" style="margin-left: 10px; border: none; " @click="deleteDiary(activeContact._id)">
+                        <i class="fas fa-solid fa-delete-left"></i> Xóa
+                    </button>
                 </div>
             </div>
         </div>
@@ -117,11 +110,23 @@ export default {
             this.activeIndex = -1;
         },
 
-
+        async createDiary(){
+            this.$router.push({ name: "diary.create" });
+        },
         async removeAllContacts() {
             if (confirm("Bạn muốn xóa tất cả Nhật ký?")) {
                 try {
                     await DiaryService.deleteAll(this.$store.getters.getPhone);
+                    this.refreshList();
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        },
+        async deleteDiary(id) {
+            if (confirm("Bạn muốn xóa Nhật ký này?")) {
+                try {
+                    await DiaryService.delete(this.$store.getters.getPhone,id);
                     this.refreshList();
                 } catch (error) {
                     console.log(error);

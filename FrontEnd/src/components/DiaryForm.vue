@@ -13,9 +13,6 @@
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Lưu</button>
-            <button v-if="contactLocal._id" type="button" class="ml-2 btn btn-danger" @click="deleteContact">
-                Xóa
-            </button>
         </div>
     </Form>
 </template>
@@ -39,8 +36,8 @@ export default {
             name: yup
                 .string()
                 .required("Nhập chủ đề nhật ký.")
-                .min(2, "Tên phải ít nhất 2 ký tự.")
-                .max(50, "Tên có nhiều nhất 50 ký tự."),
+                .min(2, "Chủ đề phải ít nhất 2 ký tự.")
+                .max(50, "Chủ đề có nhiều nhất 50 ký tự."),
 
         });
         return {
@@ -53,11 +50,6 @@ export default {
     methods: {
         submitContact() {
             this.$emit("submit:contact", this.contactLocal);
-            this.contactLocal.title=""
-            this.contactLocal.content=""
-        },
-        deleteContact() {
-            this.$emit("delete:contact", this.contactLocal.id);
         },
     },
 };

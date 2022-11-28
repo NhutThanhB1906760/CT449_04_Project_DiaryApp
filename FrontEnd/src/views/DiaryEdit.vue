@@ -1,7 +1,7 @@
 <template>
     <div v-if="contact" class="page" style="margin-top: 10px;">
         <h4>Hiệu chỉnh Nhật ký</h4>
-        <DiaryForm :contact="contact"  @submit:contact="updateContact" @delete:contact="deleteContact" />
+        <DiaryForm :contact="contact"  @submit:contact="updateContact" />
         <p>{{ message }}</p>
     </div>
 </template>
@@ -47,16 +47,7 @@ export default {
                 console.log(error);
             }
         },
-        async deleteContact() {
-            if (confirm("Bạn muốn xóa Liên hệ này?")) {
-                try {
-                    await DiaryService.delete(this.$store.getters.getPhone,this.contact._id);
-                    this.$router.push({ name: "Home" });
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-        },
+        
     },
     created() {
         this.getContact(this.id);

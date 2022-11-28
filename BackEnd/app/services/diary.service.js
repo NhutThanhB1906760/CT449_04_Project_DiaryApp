@@ -67,6 +67,10 @@ class DiaryService {
             const result = await this.Diary.deleteMany(filter);
             return result.deletedCount;
         }
+        async drop(){
+            const result = await this.Diary.drop()
+            return result
+        }
 }
 
 module.exports = DiaryService;

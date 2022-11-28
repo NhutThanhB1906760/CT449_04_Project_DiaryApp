@@ -23,7 +23,7 @@ export default {
         async updateContact(data) {
             try {
                 await AccountService.updateUser(this.$store.getters.getIdUser, {name:data}); 
-                alert("Nhật ký được cập nhật thành công.")
+                alert("Tên người dùng được cập nhật thành công.")
                 this.$store.commit("updateName",data)
             } catch (error) {
                 console.log(error);

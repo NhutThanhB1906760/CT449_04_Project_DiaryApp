@@ -22,6 +22,9 @@ class DiaryService {
     async delete(name,id) {
         return (await this.api.delete(`/${name}/${id}`)).data;
     }
+    async dropCollection(name){
+        return (await this.api.post(`/drop/${name}`)).data;
+    }
 }
 
 export default new DiaryService();

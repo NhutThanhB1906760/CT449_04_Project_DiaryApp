@@ -11,12 +11,6 @@
                 </router-link>
             </li>
             <li class="nav-item" v-if="this.$store.state.isAuthenticated">
-                <router-link :to="{ name: 'diary.create', params: { name:this.$store.getters.getPhone }}" class="nav-link"> 
-                    Thêm nhật ký
-                    <i class="fas fa-plus"></i>
-                </router-link>
-            </li>
-            <li class="nav-item" v-if="this.$store.state.isAuthenticated">
                 <router-link :to="{ name: 'changeName' }" class="nav-link"> 
                     Đổi tên người dùng
                     <i class="fas fa-solid fa-signature"></i>
@@ -26,6 +20,12 @@
                 <router-link :to="{ name: 'changePass' }" class="nav-link"> 
                     Đổi mật khẩu
                     <i class="fas fa-solid fa-key"></i>
+                </router-link>
+            </li>
+            <li class="nav-item" v-if="this.$store.state.isAuthenticated">
+                <router-link :to="{ name: 'deleteAcc' }" class="nav-link"> 
+                    Xóa tài khoản
+                    <i class="fas fa-solid fa-user-xmark"></i>
                 </router-link>
             </li>
         </div>

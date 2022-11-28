@@ -2,7 +2,7 @@
     <div class="page">
         <h4 style="text-align: center; margin-top: 20px;">ĐĂNG NHẬP</h4>
         <LoginForm :contact="contact" @submit:contact="checkLogin" />
-        <p>{{ message }}</p>
+        <p class="text-danger">{{ message }}</p>
 
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
                     await this.$store.commit("updateName", payload.name)
                     await this.$store.commit("updatePhone", payload.phone)
                     await this.$store.commit("updateisAuthenticated")
-                    alert("Đăng nhập thành công")
+                    // alert("Đăng nhập thành công")
                     this.$router.push({ name: "Home" });
                 }
             } catch (error) {

@@ -109,4 +109,17 @@ exports.deleteAll = async (req, res, next) => {
     }
 };
 
+exports.dropCollection = async (req, res, next) => {
+    try {
+        const diaryService = new DiaryService(MongoDB.client,req.params.name);
+        const kq= await diaryService.drop()
+        return res.send(kq)
+        
+    } catch (error) {
+        return next(
+            new ApiError(500, "An error occurred while removing all diary")
+        );
+    }
+};
+
 

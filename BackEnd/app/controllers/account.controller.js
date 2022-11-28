@@ -52,7 +52,22 @@ exports.update = async(req, res, next) => {
         );
     }
 };
-// exports.changeName = a
+
+exports.delete= async (req, res, next) => {
+    try {
+        const accountService = new AccountService(MongoDB.client);
+        const document = await accountService.delete(req.params.id);
+        if (!document) {
+            return next(new ApiError(404, "Account not found"));
+        }
+        return res.send({ message: "Account was deleted successfully" });
+    } catch (error) {
+        return next(
+            new ApiError(500, `Could not delete account with id=${req.params.id}`)
+        );
+    }
+};
+
 // exports.findAll = async (req, res, next) =>{
 //     let documents = []
 
@@ -109,20 +124,7 @@ exports.update = async(req, res, next) => {
 //     }
 // };
 
-// exports.delete= async (req, res, next) => {
-//     try {
-//         const accountService = new AccountService(MongoDB.client);
-//         const document = await accountService.delete(req.params.id);
-//         if (!document) {
-//             return next(new ApiError(404, "Account not found"));
-//         }
-//         return res.send({ message: "Account was deleted successfully" });
-//     } catch (error) {
-//         return next(
-//             new ApiError(500, `Could not delete account with id=${req.params.id}`)
-//         );
-//     }
-// };
+
 
 // exports.deleteAll=async (req, res, next) => {
 //     try {

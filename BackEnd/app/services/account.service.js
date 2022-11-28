@@ -65,13 +65,12 @@ class AccountService {
         );
         return result.value;
         }
-    
-//         async delete(id) {
-//             const result = await this.Account.findOneAndDelete({
-//                 _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
-//             });
-//             return result.value;
-//         }
+        async delete(id) {
+            const result = await this.Account.findOneAndDelete({
+                _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+            });
+            return result.value;
+        }
 
 //         async deleteAll() {
 //             const result = await this.Account.deleteMany({});
